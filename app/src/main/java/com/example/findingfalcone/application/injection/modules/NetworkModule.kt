@@ -1,6 +1,7 @@
 package com.example.findingfalcone.application.injection.modules
 
 import com.example.findingfalcone.BuildConfig
+import com.example.findingfalcone.data.Service
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -44,4 +45,10 @@ class NetworkModule {
             }
         }
     // endregion
+
+    @Provides
+    @Singleton
+    fun provideApiService(client: OkHttpClient): Service =
+        buildRetrofit(client)
+            .create(Service::class.java)
 }
