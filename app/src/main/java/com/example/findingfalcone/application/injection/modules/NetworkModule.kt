@@ -1,6 +1,7 @@
 package com.example.findingfalcone.application.injection.modules
 
 import com.example.findingfalcone.BuildConfig
+import com.example.findingfalcone.application.LocalProperties.Companion.BASE_URL
 import com.example.findingfalcone.data.Service
 import dagger.Module
 import dagger.Provides
@@ -13,10 +14,7 @@ import javax.inject.Singleton
 
 @Module
 class NetworkModule {
-
     companion object {
-        private const val BASE_URL = "https://findfalcone.herokuapp.com"
-
         fun buildRetrofit(httpClient: OkHttpClient): Retrofit =
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
