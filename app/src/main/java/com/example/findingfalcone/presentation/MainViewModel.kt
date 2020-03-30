@@ -67,8 +67,10 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     fun onFindClicked() {
-        _navigation.value = NavigationEvent.ShowResult(selectedItems.filter { it.value != null }.keys.toList(),
-            selectedItems.values.mapNotNull { it })
+        _navigation.value = NavigationEvent.ShowResult(
+            ArrayList(selectedItems.filter { it.value != null }.keys),
+            ArrayList(selectedItems.values.mapNotNull { it })
+        )
     }
 
     private fun getToken() {
@@ -134,7 +136,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
 
     sealed class NavigationEvent {
         data class ShowVehicleSelection(val selectedPlanet: Planet, val vehicles: ArrayList<Vehicle>) : NavigationEvent()
-        data class ShowResult(val planets: List<Planet>, val vehicles: List<Vehicle>) : NavigationEvent()
+        data class ShowResult(val planets: ArrayList<Planet>, val vehicles: ArrayList<Vehicle>) : NavigationEvent()
     }
 
     sealed class Loading {

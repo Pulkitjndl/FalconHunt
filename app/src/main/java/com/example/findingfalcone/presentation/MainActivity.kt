@@ -16,6 +16,7 @@ import com.example.findingfalcone.domain.model.Planet
 import com.example.findingfalcone.presentation.MainViewModel.Loading
 import com.example.findingfalcone.presentation.MainViewModel.NavigationEvent
 import com.example.findingfalcone.presentation.MainViewModel.ViewState
+import com.example.findingfalcone.presentation.find.FindActivity
 import com.example.findingfalcone.presentation.vehicleselection.VehicleSelectionActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         planet5Layout.setOnClickListener { viewModel.onPlanetClicked(planet5Layout.getPlanetName()) }
         planet6Layout.setOnClickListener { viewModel.onPlanetClicked(planet6Layout.getPlanetName()) }
 
-        btnFind.setOnClickListener{viewModel.onFindClicked()}
+        btnFind.setOnClickListener { viewModel.onFindClicked() }
 
         viewModel.init()
     }
@@ -119,6 +120,8 @@ class MainActivity : AppCompatActivity() {
                 )
 
             is NavigationEvent.ShowResult -> {
+                startActivity(FindActivity.intent(this, event.planets, event.vehicles))
+                finish()
             }
         }
     }

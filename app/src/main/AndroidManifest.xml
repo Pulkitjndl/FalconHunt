@@ -27,5 +27,9 @@
             android:name=".presentation.vehicleselection.VehicleSelectionActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".presentation.find.FindActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 </manifest>

@@ -24,7 +24,7 @@ interface Service {
 
     @Headers(
         "Accept: application/json",
-        "Content-Type :application/json"
+        "Content-Type: application/json"
     )
     @POST("/find")
     fun findPrinces(@Body body: FindApiRequest): Single<FindApiResponse>
