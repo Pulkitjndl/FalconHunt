@@ -6,6 +6,7 @@ import com.example.findingfalcone.domain.Repository
 import com.example.findingfalcone.domain.model.FindResponse
 import com.example.findingfalcone.domain.model.Planet
 import com.example.findingfalcone.domain.model.Vehicle
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -16,9 +17,12 @@ class ServiceManager @Inject constructor(
     private val service: Service,
     private val localProperties: LocalProperties
 ) : Repository {
-    override fun getToken() = service.getToken()
-        .map { it.token }
-        .onErrorResumeNext { Single.error(it) }
+    override fun getToken(): Completable = service.getToken()
+        .map {
+            localProperties.token = it.token // update token in the shared preferences
+        }
+        .ignoreElement()
+        .onErrorResumeNext { Completable.error(it) }
         .subscribeOn(Schedulers.io())
 
     override fun getPlanets(): Single<List<Planet>> = service.getPlanets()
@@ -32,8 +36,10 @@ class ServiceManager @Inject constructor(
         .subscribeOn(Schedulers.io())
 
     override fun findPrinces(planets: List<Planet>, vehicles: List<Vehicle>): Single<FindResponse> =
-        service.findPrinces(FindApiRequest(localProperties.token, planets.map { it.name }, vehicles.map { it.name }))
-            .map { it.mapToFindResponse() }
-            .onErrorResumeNext { Single.error(it) }
-            .subscribeOn(Schedulers.io())
+        localProperties.token?.let { token ->
+            service.findPrinces(FindApiRequest(token, planets.map { it.name }, vehicles.map { it.name }))
+                .map { it.mapToFindResponse() }
+                .onErrorResumeNext { Single.error(it) }
+                .subscribeOn(Schedulers.io())
+        } ?: Single.error(NoSuchElementException("Token is missing"))
 }

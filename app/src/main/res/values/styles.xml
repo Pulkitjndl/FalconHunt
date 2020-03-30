@@ -6,6 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorOnPrimary">@android:color/white</item>
+    </style>
+
+
+    <!--  Styles  -->
+    <style name="App.TextAppearance.subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="App.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>

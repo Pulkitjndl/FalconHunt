@@ -9,10 +9,10 @@ class LocalProperties @Inject constructor(private val pref: SharedPreferences) {
         const val BASE_URL = "https://findfalcone.herokuapp.com"
     }
 
-    var editor: SharedPreferences.Editor = pref.edit()
+    private var editor: SharedPreferences.Editor = pref.edit()
 
-    var token: String
-        get() = pref.getString(TOKEN, null) ?: throw NoSuchElementException("Token is missing")
+    var token: String?
+        get() = pref.getString(TOKEN, null)
         set(v) {
             editor.putString(TOKEN, v)
             editor.commit()
