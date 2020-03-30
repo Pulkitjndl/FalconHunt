@@ -16,6 +16,10 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    private companion object {
+        const val TAG = "MAIN_VIEW_MODEL"
+    }
+
     private val _viewState = MutableLiveData<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
 
@@ -118,7 +122,6 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     private fun onFailure(it: Throwable) {
-        Log.e("MAIN VIEW MODEL", it.message.orEmpty())
         _message.postValue(resolveError(it))
         //TODO: good to have a nicer way for failure
     }

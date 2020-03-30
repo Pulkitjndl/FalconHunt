@@ -13,7 +13,7 @@ fun VehiclesApiResponse.mapToVehicle() = Vehicle(name, amount, maxDistance, spee
 
 fun FindApiResponse.mapToFindResponse() =
     when (status) {
-        "success" -> FindResponse.Success(planetName)
+        "success" -> FindResponse.Success(planetName!!)
         "false" -> FindResponse.Failure
         else -> throw SecurityException(error)
     }
