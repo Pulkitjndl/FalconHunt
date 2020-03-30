@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Finding Falcone</string>
     <string name="btn_find_princes">Find Princes</string>
+    <string name="speed_title">Speed:</string>
+    <string name="nothing_to_select">Nothing To Select</string>
 </resources>

@@ -51,9 +51,24 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     fun onPlanetClicked(planetName: String) {
+        if (isFindEnabled()) {
+            //TODO: move string to resources
+            _message.postValue("You have selected enough planet, click Find")
+            return
+        }
         val planet = planets.first { it.name == planetName }
         _navigation.value =
-            NavigationEvent.ShowVehicleSelection(planet, getAvailableVehiclesFor(planet))
+            NavigationEvent.ShowVehicleSelection(planet, ArrayList(getAvailableVehiclesFor(planet)))
+    }
+
+    fun onActivityResult(planet: Planet, selectedVehicle: Vehicle?) {
+        selectedItems[planet] = selectedVehicle
+        _viewState.postValue(ViewState(selectedItems, isFindEnabled()))
+    }
+
+    fun onFindClicked() {
+        _navigation.value = NavigationEvent.ShowResult(selectedItems.filter { it.value != null }.keys.toList(),
+            selectedItems.values.mapNotNull { it })
     }
 
     private fun getToken() {
@@ -66,15 +81,17 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     private fun getAvailableVehiclesFor(planet: Planet): List<Vehicle> {
         val list = mutableListOf<Vehicle>()
         for (item in vehicles) {
-            if (selectedItems.values.contains(item)) {
-                list.add(item.copy(amount = item.amount - 1))
-            } else {
-                list.add(item)
+            when (val count = selectedItems.values.count { it == item }) {
+                0 -> list.add(item)
+                else -> {
+                    if (item.amount - count > 0) {
+                        list.add(item)
+                    }
+                }
             }
         }
 
-        return list.filter { it.amount > 0 }
-            .filter { it.maxDistance >= planet.distance }
+        return list.filter { it.maxDistance >= planet.distance }
     }
 
     private fun fetchData() {
@@ -86,13 +103,16 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
             .addTo(disposable)
     }
 
+    private fun isFindEnabled(): Boolean =
+        selectedItems.values.filterNotNull().count() == 4
+
     private fun onSuccess(data: Pair<List<Planet>, List<Vehicle>>) {
         planets = data.first
         vehicles = data.second
         planets.forEach {
             selectedItems[it] = null
         }
-        _viewState.postValue(ViewState(selectedItems))
+        _viewState.postValue(ViewState(selectedItems, isFindEnabled()))
     }
 
     private fun onFailure(it: Throwable) {
@@ -110,10 +130,10 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
             else -> "Something went wrong"
         }
 
-    data class ViewState(val planetVehicle: Map<Planet, Vehicle?>)
+    data class ViewState(val planetVehicle: Map<Planet, Vehicle?>, val isFindEnabled: Boolean)
 
     sealed class NavigationEvent {
-        data class ShowVehicleSelection(val selectedPlanet: Planet, val vehicles: List<Vehicle>?) : NavigationEvent()
+        data class ShowVehicleSelection(val selectedPlanet: Planet, val vehicles: ArrayList<Vehicle>) : NavigationEvent()
         data class ShowResult(val planets: List<Planet>, val vehicles: List<Vehicle>) : NavigationEvent()
     }
 

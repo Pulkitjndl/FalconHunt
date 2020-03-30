@@ -6,6 +6,8 @@ import com.example.findingfalcone.data.ServiceManager
 import com.example.findingfalcone.domain.Repository
 import com.example.findingfalcone.presentation.MainActivity
 import com.example.findingfalcone.presentation.MainViewModel
+import com.example.findingfalcone.presentation.vehicleselection.VehicleSelectionActivity
+import com.example.findingfalcone.presentation.vehicleselection.VehicleSelectionViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -24,4 +26,12 @@ abstract class MainModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+
+    @ContributesAndroidInjector
+    abstract fun bindVehicleSelectionActivity(): VehicleSelectionActivity
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VehicleSelectionViewModel::class)
+    abstract fun bindVehicleSelectionViewModel(viewModel: VehicleSelectionViewModel): ViewModel
 }
