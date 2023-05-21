@@ -56,7 +56,6 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@+id/planet6Layout"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -89,10 +88,9 @@
         android:id="@+id/planet4Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/planet6Layout"
         app:layout_constraintTop_toBottomOf="@+id/planet6Layout">
 
         <ImageView
@@ -129,8 +127,8 @@
         android:layout_marginTop="16dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/planet4Layout"
+        app:layout_constraintHorizontal_bias="1.6"
+        app:layout_constraintStart_toStartOf="@+id/planet5Layout"
         app:layout_constraintTop_toBottomOf="@+id/planet5Layout">
 
         <ImageView
@@ -163,11 +161,9 @@
         android:id="@+id/planet2Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/planet3Layout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/planet4Layout"
         app:layout_constraintTop_toBottomOf="@+id/planet4Layout">
 
         <ImageView
@@ -202,12 +198,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/btnFind"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/planet2Layout"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintTop_toBottomOf="@+id/planet3Layout">
 
         <ImageView
             android:id="@+id/planet1Image"
