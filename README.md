@@ -1,6 +1,5 @@
 Released Notes of the assignment by GeekyTrust
 
-
 Added - Dagger Integration:
 Added - RxJava 
 Used MVVM Architecture: 
