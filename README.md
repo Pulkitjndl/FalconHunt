@@ -1,4 +1,4 @@
-Released Notes of the assignment by GeekyTrust
+Author - Pulkit Released Notes of the assignment by GeekyTrust
 
 Finding Falcon Project
 The Finding Falcon project is a search mission to locate the elusive falcon and save the universe. It is built using modern Android development practices, incorporating various technologies and best practices to provide an efficient and enjoyable user experience.
