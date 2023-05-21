@@ -1,6 +1,8 @@
+Released Notes of the assignment by GeekyTrust
 
-### Finding Falcone Codding Challenge
 
-Import project in Android studio and run the application
-
-Documentation can be found here at https://www.geektrust.in/api/pdf/open/UIPS1Evaluate
+Added - Dagger Integration:
+Added - RxJava 
+Used MVVM Architecture: 
+Used ViewModel and LiveData
+Best Practices and Clean Code
