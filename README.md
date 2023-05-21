@@ -12,9 +12,9 @@ Features
 - React to failures: Handle unexpected situations and adapt the mission plan accordingly.
 - Track mission status: Monitor the mission progress and get real-time updates.
 - Technologies and Best Practices
-- Dagger: Utilize Dagger for dependency injection, enhancing modularity and testability of the codebase.
+- Dagger: Utilized Dagger for dependency injection, enhancing modularity and testability of the codebase.
 - RxJava: Leverage RxJava for reactive programming, handling asynchronous operations and data streams efficiently.
-- Coroutines: Use Coroutines to simplify asynchronous programming and provide lightweight concurrency.
+- Coroutines: Used Coroutines to simplify asynchronous programming and provide lightweight concurrency.
 - MVVM Architecture: Adopt the MVVM architectural pattern for a well-organized and maintainable codebase.
 - ViewModel: Utilize ViewModel to manage and persist UI-related data across configuration changes.
 - LiveData: Use LiveData to observe and react to data changes, ensuring a responsive UI.
